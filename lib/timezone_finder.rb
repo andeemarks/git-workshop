@@ -5,8 +5,8 @@ class TimezoneFinder
 
 	@zones = nil
 
-	def initialize timezone_file
-		@timezone_file = timezone_file
+	def initialize
+		@timezone_file = "./data/timezones.txt"
 	end
 
 	def load_zones
@@ -21,7 +21,15 @@ class TimezoneFinder
 	def zones
 		@zones ||= load_zones
 	end
+
+	def findOffsetFor(city)
+		cities = zones.select{|zone| zone[:name].split('/')[1] === city}
+
+		raise "cannot find offset for #{city}" if cities.nil? || cities.length < 1
+
+		cities[0][:gmt_offset].to_f
+	end
 end
 
-finder = TimezoneFinder.new "../data/timezones.txt"
+finder = TimezoneFinder.new 
 p finder.zones.count
