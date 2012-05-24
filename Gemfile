@@ -1,4 +1,11 @@
 source "http://rubygems.org"
-gem "rspec", :require => "spec"
-gem "rake"
+
+group :test do
+	gem "rspec", :require => "spec"
+end
+
+group :development do
+	gem "rake"
+end
+
 gem "sinatra"
