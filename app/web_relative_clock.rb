@@ -10,7 +10,11 @@ get '/city/:city' do
 	@clock = SingaporeRelativeClock.new
 
 	city = params[:city]
-	"The time difference from Singapore to #{city} is #{@clock.timeDifferenceTo(city)} hours"
+	begin
+		"The time difference from Singapore to #{city} is #{@clock.timeDifferenceTo(city)} hours"
+	rescue RuntimeError
+		"Sorry - could not find a city called #{city}.  Try again."
+	end
 end
 
 get '/favicon.ico' do 
