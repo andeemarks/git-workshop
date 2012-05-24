@@ -1,12 +1,12 @@
 class SingaporeRelativeClock
 	def initialize
-		@finder = TimezoneFinder.new
+		@finder = GMTOffsetFinder.new
 	end
 
 	def timeDifferenceTo(city)
 		singaporeGMTOffset = Time.new.utc_offset / 60 / 60
 
-		@finder.findOffsetFor(city) - singaporeGMTOffset
+		@finder.offsetFor(city) - singaporeGMTOffset
 	end
 
 end
